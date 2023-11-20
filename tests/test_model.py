@@ -1,3 +1,9 @@
+"""
+Project: Deploy a ML Model to Cloud Application Platform with FastAPI
+Author: quockhanh0212
+Date: 2023-11-20
+"""
+
 import pickle
 import pandas as pd
 import pandas.api.types as pdtypes

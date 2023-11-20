@@ -1,3 +1,9 @@
+"""
+Project: Deploy a ML Model to Cloud Application Platform with FastAPI
+Author: quockhanh0212
+Date: 2023-11-20
+"""
+
 from module.train_model import training
 import hydra
 from omegaconf import DictConfig

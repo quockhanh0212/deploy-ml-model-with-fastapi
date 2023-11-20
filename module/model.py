@@ -1,3 +1,9 @@
+"""
+Project: Deploy a ML Model to Cloud Application Platform with FastAPI
+Author: quockhanh0212
+Date: 2023-11-20
+"""
+
 import sys
 import pandas as pd
 from sklearn.linear_model import LogisticRegression

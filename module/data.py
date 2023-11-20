@@ -1,14 +1,18 @@
+"""
+Project: Deploy a ML Model to Cloud Application Platform with FastAPI
+Author: quockhanh0212
+Date: 2023-11-20
+"""
+
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+from sklearn.impute import SimpleImputer
 
 
 def process_data(
-        X,
-        categorical_features=[],
-        label=None,
-        training=True,
-        encoder=None,
-        lb=None):
+    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
+):
     """ Process the data used in the machine learning pipeline.
 
     Processes the data using one hot encoding for the categorical features and a
@@ -55,15 +59,22 @@ def process_data(
         y = np.array([])
 
     X_categorical = X[categorical_features].values
-    X_continuous = X.drop(*[categorical_features], axis=1)
+    X_continuous = X.drop(categorical_features, axis=1)
+
+    # Handling NaN values in continuous features
+    continuous_columns = X_continuous.columns
+    imputer = SimpleImputer(strategy='mean')  # You can adjust the strategy as needed
+    X_continuous = pd.DataFrame(imputer.fit_transform(X_continuous), columns=continuous_columns)
 
     if training is True:
         encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
         lb = LabelBinarizer()
+
         X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
     else:
         X_categorical = encoder.transform(X_categorical)
+
         try:
             y = lb.transform(y.values).ravel()
         except AttributeError:

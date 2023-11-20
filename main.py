@@ -1,3 +1,9 @@
+"""
+Project: Deploy a ML Model to Cloud Application Platform with FastAPI
+Author: quockhanh0212
+Date: 2023-11-20
+"""
+
 from typing import Dict
 import pickle
 import pandas as pd
